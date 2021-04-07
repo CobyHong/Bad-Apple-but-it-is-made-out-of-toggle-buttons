@@ -1,3 +1,42 @@
+var frameCount = 0;
+var fps, fpsInterval, startTime, now, then, elapsed;
+
+
+function animate(toggles, data) {
+	// request another frame
+    requestAnimationFrame( () =>
+	{
+		animate(toggles, data);
+	});
+
+	// calc elapsed time since last loop
+    now = Date.now();
+    elapsed = now - then;
+
+    // if enough time has elapsed, draw the next frame
+    if (elapsed > fpsInterval) {
+        // Get ready for next frame by setting then=now, but...
+        // Also, adjust for fpsInterval not being multiple of 16.67
+        then = now - (elapsed % fpsInterval);
+
+        // draw stuff here
+		if (frameCount == 13143)
+		{
+			return;
+		}
+		playFrames(toggles, data, frameCount++);
+
+        // TESTING...Report #seconds since start and achieved fps.
+        var sinceStart = now - startTime;
+        // var currentFps = Math.round(1000 / (sinceStart / ++frameCount) * 100) / 100;
+    }
+
+}
+
+
+// ==============================================================================
+
+
 function GetJson()
 {
 	return fetch("bad_apple.json")
@@ -7,21 +46,20 @@ function GetJson()
 	})
 }
 
+
 function playFrames(toggles, data, curr_frame)
 {
 	var i;
+	var states_dictionary={ 
+		"O": true, 
+		"-": false
+	};
 	for(i=0; i<2400; i++)
 	{
-		if(data[curr_frame][i] == 'O')
-		{
-			toggles[i].checked = true;		
-		}
-		else
-		{
-			toggles[i].checked = false;	
-		}
+		toggles[i].checked = states_dictionary[data[curr_frame][i]];	
 	}
 }
+
 
 // function playVideo(toggles, data, curr_frame, max_frame)
 // {
@@ -40,33 +78,6 @@ function playFrames(toggles, data, curr_frame)
 // 	// );
 // }
 
-function playVideo(toggles, data, curr_frame, max_frame) {
-    setTimeout(function() {
-		// // get function start time.
-		// var videoStartTime  = performance.now();
-
-		// drawing code goes Here
-		if (curr_frame == max_frame)
-		{
-			return;
-		}
-		playFrames(toggles, data, curr_frame);
-		curr_frame += 1;
-
-		requestAnimationFrame(
-			timestamp =>
-			{
-				playVideo(toggles, data, curr_frame, max_frame);
-
-				// const timeInVideo = videoStartTime - timestamp;
-				// curr_frame = Math.floor(timeInVideo / (60*1000));
-				// console.log(curr_frame);
-			}
-		);
-
-
-    }, 0);
-}
 
 async function playAudio()
 {
@@ -89,12 +100,16 @@ async function createToggles()
 	var container = document.getElementById('toggles');
 	container.innerHTML = htmlElements;
 
-
 	var data = await GetJson();
 	var toggles = document.getElementsByTagName("input");
 
-	var max_frame = 13143;
-	curr_frame = 0;
+	// var max_frame = 13143;
+	// curr_frame = 0;
 
-	playVideo(toggles, data, curr_frame, max_frame);
+    fpsInterval = 1000 / 60;
+    then = Date.now();
+    startTime = then;
+
+	animate(toggles, data);
+	// playVideo(toggles, data, curr_frame, max_frame);
 }

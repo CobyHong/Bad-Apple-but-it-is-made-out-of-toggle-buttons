@@ -10,8 +10,8 @@ I made this out of boredom.
 If you have any inquiries or wanna contact me on other stuff / jobs, contact me!
 
 Contacts:
-LinkedIn: https://www.linkedin.com/in/coby-hong-a61445160/
-Email: CobyHong98@gmail.com
+LinkedIn: https://www.linkedin.com/in/coby-hong-a61445160/ <br />
+Email: CobyHong98@gmail.com <br />
 
 
 

@@ -1,0 +1,27 @@
+Step 1:
+while in same directory:
+do: python -m http.server
+
+this is to get the application running on local server to trick it into letting us do http request / fetch json.
+
+do: pip install all the necessary external libararies shown in the python files.
+
+================================
+
+Step 2:
+create a folder called "video frames" in same directory.
+do: python video_to_frames.py
+
+This will take the Bad Apple video and convert it into a bunch of images / frames. Stored in video frames.
+
+================================
+
+Step 3:
+do: python frames_to_text.py
+
+this will convert the images into a dictionary of string values.
+
+================================
+
+Step 4:
+do: "http://localhost:8000/index.html" in browser

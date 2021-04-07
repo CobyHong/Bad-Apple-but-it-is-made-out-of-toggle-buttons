@@ -1,5 +1,7 @@
 # Bad Apple but it is actually a bunch of toggle buttons
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/jS6CQruJdfQ/0.jpg)](https://www.youtube.com/watch?v=jS6CQruJdfQ)
+
 ## Introduction
 
 Hi my name is Coby Hong (Cal Poly Liberal Arts of Engineering Major).
